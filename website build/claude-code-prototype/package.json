@@ -1,0 +1,23 @@
+{
+  "name": "claude-code-prototype",
+  "version": "1.0.0",
+  "description": "A prototype demonstrating how Claude Code works",
+  "main": "index.js",
+  "bin": {
+    "claude": "./index.js"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "claude",
+    "code",
+    "AI",
+    "coding",
+    "assistant",
+    "CLI"
+  ],
+  "author": "",
+  "license": "ISC"
+}

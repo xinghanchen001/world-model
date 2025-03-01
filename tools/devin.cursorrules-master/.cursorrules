@@ -1,0 +1,224 @@
+# Instructions
+
+During your interaction with the user, if you find anything reusable in this project (e.g. version of a library, model name), especially about a fix to a mistake you made or a correction you received, you should take note in the `Lessons` section in the `.cursorrules` file so you will not make the same mistake again.
+
+You should also use the `.cursorrules` file as a Scratchpad to organize your thoughts. Especially when you receive a new task, you should first review the content of the Scratchpad, clear old different task if necessary, first explain the task, and plan the steps you need to take to complete the task. You can use todo markers to indicate the progress, e.g.
+[X] Task 1
+[ ] Task 2
+
+Also update the progress of the task in the Scratchpad when you finish a subtask.
+Especially when you finished a milestone, it will help to improve your depth of task accomplishment to use the Scratchpad to reflect and plan.
+The goal is to help you maintain a big picture as well as the progress of the task. Always refer to the Scratchpad when you plan the next step.
+
+# Tools
+
+Note all the tools are in python. So in the case you need to do batch processing, you can always consult the python files and write your own script.
+
+## Screenshot Verification
+
+The screenshot verification workflow allows you to capture screenshots of web pages and verify their appearance using LLMs. The following tools are available:
+
+1. Screenshot Capture:
+
+```bash
+venv/bin/python tools/screenshot_utils.py URL [--output OUTPUT] [--width WIDTH] [--height HEIGHT]
+```
+
+2. LLM Verification with Images:
+
+```bash
+venv/bin/python tools/llm_api.py --prompt "Your verification question" --provider {openai|anthropic} --image path/to/screenshot.png
+```
+
+Example workflow:
+
+```python
+from screenshot_utils import take_screenshot_sync
+from llm_api import query_llm
+
+# Take a screenshot
+
+screenshot_path = take_screenshot_sync('https://example.com', 'screenshot.png')
+
+# Verify with LLM
+
+response = query_llm(
+    "What is the background color and title of this webpage?",
+    provider="openai",  # or "anthropic"
+    image_path=screenshot_path
+)
+print(response)
+```
+
+## LLM
+
+You always have an LLM at your side to help you with the task. For simple tasks, you could invoke the LLM by running the following command:
+
+```
+venv/bin/python ./tools/llm_api.py --prompt "What is the capital of France?" --provider "anthropic"
+```
+
+The LLM API supports multiple providers:
+
+- OpenAI (default, model: gpt-4o)
+- Azure OpenAI (model: configured via AZURE_OPENAI_MODEL_DEPLOYMENT in .env file, defaults to gpt-4o-ms)
+- DeepSeek (model: deepseek-chat)
+- Anthropic (model: claude-3-sonnet-20240229)
+- Gemini (model: gemini-pro)
+- Local LLM (model: Qwen/Qwen2.5-32B-Instruct-AWQ)
+
+But usually it's a better idea to check the content of the file and use the APIs in the `tools/llm_api.py` file to invoke the LLM if needed.
+
+## Web browser
+
+You could use the `tools/web_scraper.py` file to scrape the web.
+
+```
+venv/bin/python ./tools/web_scraper.py --max-concurrent 3 URL1 URL2 URL3
+```
+
+This will output the content of the web pages.
+
+## Search engine
+
+You could use the `tools/search_engine.py` file to search the web.
+
+```
+venv/bin/python ./tools/search_engine.py "your search keywords"
+```
+
+This will output the search results in the following format:
+
+```
+URL: https://example.com
+Title: This is the title of the search result
+Snippet: This is a snippet of the search result
+```
+
+If needed, you can further use the `web_scraper.py` file to scrape the web page content.
+
+## Web Tools Quick Setup
+
+For quick setup of the web search and scraping tools, use the setup script:
+
+```bash
+# Navigate to the directory containing the tools
+cd tools/devin.cursorrules-master
+
+# Run the setup script
+./setup_web_tools.sh
+```
+
+This script will:
+
+1. Check if a virtual environment exists, create one if needed
+2. Activate the virtual environment
+3. Install all required dependencies
+4. Install Playwright browsers if needed
+
+After running the script, you can immediately use:
+
+```bash
+# For web search
+python tools/search_engine.py "your search query"
+
+# For web scraping
+python tools/web_scraper.py "https://example.com"
+
+# Or use the combined tool for both search and scrape in one command:
+python web_search_and_scrape.py --search "your query" --scrape-top 3
+python web_search_and_scrape.py --scrape "https://example.com"
+```
+
+The environment will remain active for the current terminal session.
+
+## Web Tools Comprehensive Guide
+
+A comprehensive guide to the web search and scraping tools is available in the `WEB_TOOLS_README.md` file. Here's a summary of the key information:
+
+### Available Web Tools
+
+1. **Search Engine** (`search_engine.py`): Search the web using DuckDuckGo.
+2. **Web Scraper** (`web_scraper.py`): Scrape content from web pages.
+3. **Combined Tool** (`web_search_and_scrape.py`): Combines both search and scrape functionality.
+4. **Simplified Shell Scripts** (`search.sh` and `scrape.sh`): Wrapper scripts for even easier usage.
+
+### Combined Web Search and Scrape Tool
+
+A combined tool is available to make it even easier to search and scrape content:
+
+```bash
+# Search only
+python web_search_and_scrape.py --search "your search query"
+
+# Search and automatically scrape the top 3 results
+python web_search_and_scrape.py --search "your search query" --scrape-top 3
+
+# Scrape a specific URL
+python web_search_and_scrape.py --scrape "https://example.com"
+```
+
+This tool combines the functionality of both search_engine.py and web_scraper.py in a single command.
+
+### Simplified Shell Scripts
+
+For even easier usage, shell scripts are available:
+
+```bash
+# Search with the search.sh script
+./search.sh "your search query"
+
+# Search and scrape the top result
+./search.sh "your search query" -s 1
+
+# Scrape one or more URLs with the scrape.sh script
+./scrape.sh https://example.com https://another-site.com
+```
+
+These shell scripts are wrappers around the web_search_and_scrape.py tool that make it more convenient to use.
+
+### Example Use Cases
+
+1. **Search for information about Python asyncio**:
+
+   ```bash
+   ./search.sh "Python asyncio tutorial"
+   ```
+
+2. **Search for information and scrape the top 2 results**:
+
+   ```bash
+   ./search.sh "Python data visualization libraries" -s 2
+   ```
+
+3. **Scrape specific documentation pages**:
+   ```bash
+   ./scrape.sh https://docs.python.org/3/library/asyncio.html https://realpython.com/python-async-features/
+   ```
+
+### Troubleshooting Web Tools
+
+- If you encounter rate limiting with the search engine, try reducing the frequency of your searches or use the scrape functionality directly with known URLs.
+- If web scraping fails for certain sites, they may be using anti-scraping techniques. Try using a different URL or adjust the scraping approach.
+- For any other issues, check the error messages in the output for guidance on what went wrong.
+
+# Lessons
+
+## User Specified Lessons
+
+- You have a python venv in ./venv. Use it.
+- Include info useful for debugging in the program output.
+- Read the file before you try to edit it.
+- Due to Cursor's limit, when you use `git` and `gh` and need to submit a multiline commit message, first write the message in a file, and then use `git commit -F <filename>` or similar command to commit. And then remove the file. Include "[Cursor] " in the commit message and PR title.
+- For web search and scraping tools, run the setup_web_tools.sh script first to set up the environment automatically.
+- Refer to WEB_TOOLS_README.md and the Web Tools Comprehensive Guide section in this file for detailed instructions on using the web search and scraping tools including search.sh and scrape.sh scripts.
+
+## Cursor learned
+
+- For search results, ensure proper handling of different character encodings (UTF-8) for international queries
+- Add debug information to stderr while keeping the main output clean in stdout for better pipeline integration
+- When using seaborn styles in matplotlib, use 'seaborn-v0_8' instead of 'seaborn' as the style name due to recent seaborn version changes
+- Use 'gpt-4o' as the model name for OpenAI's GPT-4 with vision capabilities
+- DuckDuckGo search API may hit rate limits; if search fails, use web scraper directly with specific URLs
+
+# Scratchpad
