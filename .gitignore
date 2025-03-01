@@ -1,0 +1,31 @@
+# macOS system files
+.DS_Store
+._.DS_Store
+**/.DS_Store
+**/._.DS_Store
+
+# Obsidian files
+.obsidian/
+
+# Swap files
+*.swp
+*.swo
+
+# Environment variables and secrets
+.env
+.env.local
+*.pem
+
+# Logs
+logs
+*.log
+
+# Dependency directories
+node_modules/
+venv/
+env/
+
+# Distribution / packaging
+dist/
+build/
+*.egg-info/ 

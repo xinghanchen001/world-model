@@ -1,32 +1,22 @@
-# World Model Repository
-This repository contains research, documents, and tools related to working with AI systems and document management in AI collaboration contexts.
+# World Model
 
-## Repository Structure
+My personal world model repository for organizing and connecting knowledge.
 
-- **research/** - Contains organized research documents
-- **Clippings/** - Collection of saved articles and resources
-- **tools/** - Utility scripts and tools
-- **website build/** - Website related code and prototypes
+## About
 
-## Version Control
+This repository contains my personal knowledge base, organized in a way that helps me build a comprehensive "world model" - a framework for understanding how different pieces of information and concepts connect with each other.
 
-This repository is version controlled using Git. The main purpose is to track changes to documents, especially those related to AI collaboration and document management strategies.
+## Structure
 
-## Getting Started
+- `/tools` - Scripts and utilities to help manage and analyze the knowledge base
+- `/notes` - Individual notes and documents
+- `/concepts` - Core concepts that form the foundation of the world model
+- `/connections` - Mappings and relationships between different concepts and areas of knowledge
 
-To work with this repository:
+## Usage
 
-1. Clone the repository
-2. Use an Obsidian vault to open and edit the markdown files (optional)
-3. Make changes to documents
-4. Commit changes with descriptive commit messages
+This repository is primarily maintained using [Obsidian](https://obsidian.md/), a powerful knowledge management tool that allows for creating and visualizing connections between different pieces of information.
 
-## Document Management
+## License
 
-This repository follows the document management principles outlined in the [AI Document Management Summary](research/version control/ai_document_management_summary.md), which covers:
-
-- Document management solutions in AI collaboration
-- Approaches to AI-friendly documentation
-- Assessment mechanisms for document quality
-- Risk management approaches
-- Technical insights and best practices
+Personal use only - All rights reserved.
