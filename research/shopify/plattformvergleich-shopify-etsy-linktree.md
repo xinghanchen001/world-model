@@ -1,4 +1,4 @@
-# Vergleich der Plattformen Shopify, Etsy und Linktree
+        # Vergleich der Plattformen Shopify, Etsy und Linktree
 
 ## Gebührenstruktur
 
