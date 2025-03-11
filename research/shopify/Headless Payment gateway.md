@@ -1,5 +1,4 @@
 
-
 ### Key Points
 - Es scheint wahrscheinlich, dass Sie eine Zahlungslösung und eine Bestellverwaltung ohne monatliche Gebühren finden können, indem Sie entweder eine kopflose E-Commerce-Plattform oder ein Zahlungsgateway mit integrierter Bestellverwaltung nutzen.
 - Forschung deutet darauf hin, dass kopflose Plattformen wie Saleor oder WooCommerce umfassende Funktionen bieten, während Zahlungsgateways wie Stripe Orders oder Square Orders einfacher einzurichten sind.
